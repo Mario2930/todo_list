@@ -1,3 +1,4 @@
+//npm run dev
 const servidor = require('./config/servidor')
 const app = servidor.app
 const porta = servidor.porta
