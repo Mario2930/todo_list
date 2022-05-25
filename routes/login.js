@@ -15,8 +15,13 @@ module.exports = (app)=>{
         if(!procurar){
             return res.send('Email não cadastrado!!')
         }
-
-
-        res.render('atividades.ejs')
+        //comparar a senha digitada com a armazenada
+        const bcrypt = require('bcryptjs')
+        var comparar = await bcrypt.compare(req.body.senha,procurar.senha)
+        if(!comparar){
+            return res.send('Senha Incorreta')
+        }
+        //abrir a view atividades e enviar nome e id
+        res.render('atividades.ejs',{nome:procurar.nome,id:procurar._id})
     })
 }
