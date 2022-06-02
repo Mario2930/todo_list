@@ -19,7 +19,7 @@ module.exports = (app)=>{
         
         // buscar todas as atividades desse usuario
         var buscar = await atividades.find({usuario:dados.id})
-        //console.log(buscar)
+        console.log(buscar)
         res.render('atividades.ejs',{nome:dados.nome,id:dados.id,dados:buscar})
     })
 }
