@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
 const modelo = mongoose.Schema({
     data:Date,
     tipo:String,
+    materia:String,
     entrega: String,
-    disciplina:String,
     instrucoes:String,
     usuario:String
 })
