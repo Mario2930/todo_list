@@ -9,9 +9,18 @@ module.exports = (app)=>{
         //buscar o nome na collection usuarios
         var user = await usuarios.findOne({_id:id})
         //buscar todas as atividades desse usuario
-        var buscar = await atividades.find({usuario:id})
+        var abertas = await atividades.find({usuario:id,status:0}).sort({data:1})
+        //buscar todas as atividades desse usuario
+        var entregues = await atividades.find({usuario:id,status:1}).sort({data:1})
+        //buscar todas as atividades desse usuario
+        var excluidas = await atividades.find({usuario:id,status:2}).sort({data:1})
+
+
         //console.log(buscar)
-        res.render('atividades.ejs',{nome:user.nome,id:user._id,dados:buscar})
+        //res.render('atividades.ejs',{nome:user.nome,id:user._id,dados:abertas,dadosx:excluidas,dadose:entregues})
+        //abri a view accordion
+        //res.render('accordion.ejs',{nome:user.nome,id:user._id,dados:abertas,dadosx:excluidas,dadose:entregues})
+        res.render('atividades2.ejs',{nome:user.nome,id:user._id,dados:abertas,dadosx:excluidas,dadose:entregues})
     })
 
     //gravar as informações do formulário na colection atividades
@@ -39,9 +48,40 @@ module.exports = (app)=>{
     app.get("/excluir",async(req,res)=>{
         //recuperar o parametro id da barra de indereço
         var id = req.query.id
-        var excluir = await atividades.findOneAndRemove({
-            _id:id
-        })
+        //var excluir = await atividades.findOneAndRemove({_id:id})
+        var excluir = await atividades.findOneAndUpdate(
+            {_id:id},
+            {status:2}
+        )
         res.redirect('/atividades?id='+excluir.usuario)
+    })
+
+    //entrega atividades
+    app.get("/entregue",async(req,res)=>{
+        //recuperar o parametro id da barra de indereço
+        var id = req.query.id
+        var entregue = await atividades.findOneAndUpdate(
+            {_id:id},
+            {status:1}
+        )
+        res.redirect('/atividades?id='+entregue.usuario)
+    })
+
+        //desfazer atividades
+        app.get("/desfazer",async(req,res)=>{
+            //recuperar o parametro id da barra de indereço
+            var id = req.query.id
+            var desfazer = await atividades.findOneAndUpdate(
+                {_id:id},
+                {status:0}
+            )
+            res.redirect('/atividades?id='+desfazer.usuario)
+        })
+    //Aniquilar atividades
+    app.get("/aniquilar",async(req,res)=>{
+        //recuperar o parametro id da barra de indereço
+        var id = req.query.id
+        var aniquilar = await atividades.findOneAndRemove({_id:id})
+        res.redirect('/atividades?id='+aniquilar.usuario)
     })
 }
