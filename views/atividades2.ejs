@@ -50,6 +50,18 @@
                             <option value="Lp2">Linguagem de Programação</option>
                             <option value="Inw">Internet (WebDesign)</option>
                             <option value="Mat">Mátematica</option>
+                            <option value="Pot">Portugues</option>
+                            <option value="HeG">Historia e Geografia</option>
+                            <option value="Pt">Produção de Texto</option>
+                            <option value="Fis">Fisica</option>
+                            <option value="Qui">Quimica</option>
+                            <option value="Bio">Biologia</option>
+                            <option value="Soc">Sociologia</option>
+                            <option value="Art">Arte</option>
+                            <option value="Ans">Analise de Sistemas</option>
+                            <option value="CGf">Computação Grafica</option>
+                            <option value="RCS">Rede de Computador e Segurança</option>
+                            <option value="EdF">Ed. Fisica</option>
                         </select>
                         <label for="floatingSelect">Máteria:</label>
                     </div>
@@ -75,7 +87,7 @@
                             <% for (var n=0; n<dados.length;n++){%>
                                 <div class="card">
                                     <div class="card-header bg-dark text-light">
-                                        Data:<%=dados[n].data.getDay()+2%>° dia da semana - <%=dados[n].data.getDate()+1%>/<%=dados[n].data.getMonth()+1%>/<%=dados[n].data.getFullYear()%>
+                                        Data:<%=dados[n].data.getDay()+1%>° dia da semana - <%=dados[n].data.getDate()+1%>/<%=dados[n].data.getMonth()+1%>/<%=dados[n].data.getFullYear()%>
                                     </div>
                                     <div class="card-body">
                                         <div class="card-title">Tipo:<%=dados[n].tipo%></div>
