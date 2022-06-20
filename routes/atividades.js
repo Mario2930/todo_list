@@ -84,4 +84,15 @@ module.exports = (app)=>{
         var aniquilar = await atividades.findOneAndRemove({_id:id})
         res.redirect('/atividades?id='+aniquilar.usuario)
     })
+    //criar a rota para renderizar a view alterar
+    app.get('/alterar',async(req,res)=>{
+        // capturar o id(atividade) da barra de endereço
+        var id= req.query.id
+        //buscar a atividade que será alterada
+        var alterar = await atividades.findOne({_id:id})
+        //buscar o nome na collection usuarios
+        var user = await usuarios.findOne({_id:alterar.usuario})
+    
+        res.render('alterar.ejs',{nome:user.nome,id:user._id,dados:alterar})
+    })
 }
